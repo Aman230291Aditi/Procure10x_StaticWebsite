@@ -1,5 +1,5 @@
 /* ===================================
-    Crafto - It business
+    procure - It business
 ====================================== */
 /* font */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap');
@@ -18,7 +18,7 @@ body{
 }
 /* header */
 header .navbar-brand img {
-    max-height: 32px;
+    max-height: 52px;
 } 
 .navbar .navbar-nav .nav-link {
     font-size: 17px;

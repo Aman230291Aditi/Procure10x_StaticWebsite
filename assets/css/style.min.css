@@ -3171,7 +3171,7 @@ textarea:focus {
   padding: 0;
   border-radius: 100%;
 }
-.crafto-progressive-blur {
+.procure-progressive-blur {
   height: var(--progressive-blur-height);
   left: 0;
   position: fixed;
@@ -3180,12 +3180,12 @@ textarea:focus {
   width: 100%;
   z-index: 19;
 }
-.crafto-progressive-blur.crafto-progressive-blur-bottom {
+.procure-progressive-blur.procure-progressive-blur-bottom {
   bottom: 0;
   top: auto;
   transform: scaleY(-1);
 }
-.crafto-progressive-blur > div {
+.procure-progressive-blur > div {
   height: 100%;
   left: 0;
   position: absolute;
@@ -7524,7 +7524,7 @@ header .navbar.mini-header .navbar-brand img {
 header .navbar-brand {
   margin-right: 0;
   vertical-align: middle;
-  padding: 30px 0;
+  padding: 15px 0;
   display: inline-block;
   font-size: 0;
 }
@@ -7625,9 +7625,9 @@ header.sticky .navbar.disable-fixed {
 .navbar {
   padding: 0;
 }
-.navbar .navbar-nav .nav-item > i {
+/* .navbar .navbar-nav .nav-item > i {
   display: none;
-}
+} */
 .navbar .navbar-nav .nav-item .nav-link.active,
 .navbar .navbar-nav .nav-item.active .nav-link,
 .navbar .navbar-nav .nav-item:hover .nav-link {

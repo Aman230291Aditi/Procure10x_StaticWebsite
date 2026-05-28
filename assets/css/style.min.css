@@ -3972,6 +3972,10 @@ textarea:focus {
 .border-color-base-color {
   border-color: var(--base-color) !important;
 }
+
+.background-base-color{
+ background-color: var(--base-color) !important; 
+}
 .border-color-white {
   border-color: var(--white) !important;
 }

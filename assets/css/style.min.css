@@ -7289,7 +7289,7 @@ header .container-fluid {
   padding-right: 45px;
 }
 header.sticky .navbar-brand {
-  padding: 20px 0;
+  padding: 5px 0;
 }
 header.sticky .navbar {
   -webkit-transform: translateY(-100%);
@@ -7519,12 +7519,12 @@ header .navbar.mini-header .navbar-brand {
   padding: 20px 0;
 }
 header .navbar.mini-header .navbar-brand img {
-  max-height: 46px;
+  max-height: 130px;
 }
 header .navbar-brand {
   margin-right: 0;
   vertical-align: middle;
-  padding: 15px 0;
+  padding: 5px 0;
   display: inline-block;
   font-size: 0;
 }
@@ -7540,7 +7540,7 @@ header .navbar-brand .mobile-logo {
   width: 0;
 }
 header .navbar-brand img {
-  max-height: 46px;
+  max-height: 120px;
 }
 header .header-top-bar {
   position: fixed;
@@ -20021,5 +20021,60 @@ footer .footer-navbar .nav-item:last-child a {
 }
 .footer-demo img {
   max-height: 55px !important;
+}
+
+
+
+/* bg color */
+.bg-cabaret-red {
+    background-color: #d94f6f;
+}
+.bg-ghost-white{
+    background-color: #F4F6FF;
+}
+.bg-cosmic-latte-white{
+    background-color: #F2FBF9;
+}
+.bg-chablis-red{
+    background-color: #FEF3F5;
+}
+.bg-lavender-violet{
+    background-color: #F5EDFC;
+}
+.bg-clear-green {
+    background-color: #E9F6F5;
+}
+.bg-linen-white {
+    background-color: #FBF3EE;
+}
+.bg-lavender-violet-light {
+    background-color: #ECF7FC;
+}
+.bg-midnight-blue {
+    background-color: #242e45;
+}
+
+.bg-sky-blue{
+background-color: #EAF4FF;
+}
+
+.bg-peach {
+  background-color: #FFF1E8;
+}
+  /* sky blue */
+.bg-gradient-flamingo-amethyst-green {
+    background-image: linear-gradient(to right, #E3545C, #c84d9d, #885dd1, #2f86bc, #01a89e);
+}
+.bg-gradient-very-light-gray {
+    background-image: linear-gradient(to bottom, #f9eaec, #f9eaec, #faf5f9, #fcfafc, #ffffff);
+}
+.bg-gradient-very-ghost-white {
+    background-image: linear-gradient(to bottom, #f4f6ff, #f7f8ff, #fafaff, #fdfdff, #ffffff);
+}
+/* text gradient color */
+.text-gradient-orange-sky-blue {
+    background-image: linear-gradient(to right, #E2545D, #AB5A99, #7466C6, #4588B0, #1BA69C);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 /*# sourceMappingURL=style.min.css.map */

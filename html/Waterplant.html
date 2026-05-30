@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SCADA Water Plant</title>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial, Helvetica, sans-serif;
+    }
+
+    html,
+    body{
+      width:100%;
+      height:100%;
+      overflow:auto;
+      background:#ffffff;
+    }
+
+    /* SCROLL WRAPPER */
+    .scada-wrapper{
+      width:100%;
+      overflow:auto;
+    }
+
+    /* MAIN SCREEN */
+    .plant-container{
+      width:1200px;
+      height:700px;
+      position:relative;
+      background:#ffffff;
+      margin-left:50px;
+       margin-top:50px
+    }
+
+    /* =========================================
+       PIPE STYLES
+    ========================================== */
+
+    .pipe{
+      position:absolute;
+      height:14px;
+      background:linear-gradient(to bottom,#8fd0ff,#2d7de6,#8fd0ff);
+      border:2px solid #7a7a7a;
+      border-radius:20px;
+      overflow:hidden;
+    }
+
+    .pipe-flow{
+      position:absolute;
+      top:3px;
+      left:0;
+      width:100%;
+      height:4px;
+      background:repeating-linear-gradient(
+        to right,
+        #ffffff 0px,
+        #ffffff 10px,
+        transparent 10px,
+        transparent 20px
+      );
+      animation:flow 1s linear infinite;
+    }
+
+    @keyframes flow{
+      from{
+        transform:translateX(0);
+      }
+      to{
+        transform:translateX(20px);
+      }
+    }
+
+    /* MAIN PIPE */
+    .pipe-main{
+      width:680px;
+      left:0;
+      top:360px;
+    }
+
+    /* RIGHT PIPE */
+    .pipe-right{
+    width: 340px;
+    right: 0;
+    top: 346px;
+    }
+
+    /* VERTICAL PIPE */
+    .pipe-vertical{
+         width: 14px;
+    height: 210px;
+    left: 675px;
+    top: 154px;
+    }
+
+    .pipe-vertical .pipe-flow{
+      width:4px;
+      height:100%;
+      left:3px;
+      top:0;
+
+      background:repeating-linear-gradient(
+        to bottom,
+        #ffffff 0px,
+        #ffffff 10px,
+        transparent 10px,
+        transparent 20px
+      );
+
+      animation:flowVertical 1s linear infinite;
+    }
+
+    @keyframes flowVertical{
+      from{
+        transform:translateY(20px);
+      }
+      to{
+        transform:translateY(0px);
+      }
+    }
+
+    /* =========================================
+       PIPE ELBOWS
+    ========================================== */
+
+    .elbow{
+         position: absolute;
+ 
+    }
+
+    .elbow1 {
+    position: absolute;
+  
+   
+}
+
+    .elbow-top{
+            left: 673px;
+    top: 123px;
+  
+    transform: rotate(270deg);
+    }
+
+    .elbow-bottom{
+left: 644px;
+    top: 329px;
+  
+    transform: rotate(90deg);
+    }
+
+    /* =========================================
+       WARNING ICON
+    ========================================== */
+
+    .warning{
+      position:absolute;
+      top:20px;
+      left:20px;
+      font-size:80px;
+    }
+
+    /* =========================================
+       DISPLAY BOXES
+    ========================================== */
+
+    .display{
+      position:absolute;
+      background:#4f8dc7;
+      color:#fff;
+      padding:6px 14px;
+      border:2px solid #555;
+      font-size:24px;
+      font-weight:bold;
+      box-shadow:inset 0 0 6px rgba(0,0,0,0.4);
+    }
+
+    .chlorine-display{
+      left:995px;
+      top:110px;
+    }
+
+   .flow-display {
+    left: 480px;
+    top: 216px;
+}
+
+    .level-display{
+        right: 170px;
+    top: -4px;
+    }
+
+    /* =========================================
+       LABELS
+    ========================================== */
+
+    .label{
+      position:absolute;
+      color:#222;
+      font-weight:bold;
+    }
+
+    .chlorine-label{
+      right:113px;
+      top:80px;
+      font-size:18px;
+    }
+
+    .ppm{
+      right:85px;
+      top:120px;
+      font-size:16px;
+    }
+
+    .flow-label{
+   left: 496px;
+    top: 185px;
+    font-size: 26px;
+    }
+
+    .sensor-label{
+      left:700px;
+      top:-5px;
+      text-align:center;
+      font-size:16px;
+    }
+
+    /* =========================================
+       STATUS BOX
+    ========================================== */
+
+    .status-box{
+      position:absolute;
+      left:420px;
+      top:60px;
+      width:180px;
+      background:#efefef;
+      border:2px solid #666;
+      padding:15px;
+    }
+
+    .status{
+      display:flex;
+      align-items:center;
+      gap:15px;
+      font-size:22px;
+      font-weight:bold;
+    }
+
+    .circle{
+      width:24px;
+      height:24px;
+      border-radius:50%;
+      border:1px solid #222;
+    }
+
+    .green{
+      background:limegreen;
+    }
+
+    .red{
+      background:red;
+    }
+
+    /* =========================================
+       VALVES
+    ========================================== */
+
+    .valve{
+      position:absolute;
+      /* width:34px;
+      height:34px;
+      background:#b9b9b9;
+      border:2px solid #666;
+      border-radius:50%; */
+    }
+
+    /* .valve::before{
+      content:"";
+      position:absolute;
+      width:45px;
+      height:5px;
+      background:red;
+      top:-9px;
+      left:-7px;
+      border-radius:10px;
+    } */
+
+    .red-valve1{
+    left: 93px;
+    top: 300px;
+    }
+
+    .red-valve1 img {
+        width: 80px;
+    }
+
+    .green-valve{
+         left: 310px;
+    top: 300px;
+    }
+
+    .red-valve-label{
+      position:absolute;
+          top: 87px;
+    left: 14px;
+    font-size: 16px;
+    font-weight: bold;
+
+    }
+
+    .fcv{
+      position:absolute;
+    left: 335px;
+    top: 284px;
+      font-size:16px;
+      font-weight:bold;
+    }
+
+    .main-valve{
+      position:absolute;
+      left:308px;
+      top:395px;
+      font-size:16px;
+      font-weight:bold;
+    }
+
+    /* =========================================
+       FLOW METER
+    ========================================== */
+
+    .flow-meter{
+      position:absolute;
+      left: 462px;
+    top: 260px;
+     
+    }
+
+    .flow-meter-label{
+      position:absolute;
+      left:475px;
+      top:390px;
+      font-size:16px;
+      font-weight:bold;
+    }
+
+    /* =========================================
+       TANK
+    ========================================== */
+
+    .tank{
+      position:absolute;
+      left:735px;
+      top:120px;
+      width:140px;
+      height:250px;
+      background:#d9d9d9;
+      border:2px solid #8b8b8b;
+    }
+
+    .tank-top{
+      width:120px;
+      height:35px;
+      background:#8f8f8f;
+      border-radius:50% 50% 0 0;
+      margin:auto;
+      margin-top:-18px;
+      position:relative;
+    }
+
+    .tank-water{
+      position:absolute;
+      top:70px;
+      left:0;
+      width:100%;
+      height:33%;
+      background:#2f95ff;
+    }
+
+    .tank-percent{
+      position:absolute;
+      top:90px;
+      left:50%;
+      transform:translateX(-50%);
+      font-size:18px;
+      font-weight:bold;
+      z-index:2;
+    }
+
+    .tank-lines{
+      position:absolute;
+      width:100%;
+      height:100%;
+      display:flex;
+      justify-content:space-evenly;
+      align-items:flex-end;
+      padding-bottom:15px;
+    }
+
+    .tanki-top{
+        left: 750px;
+    top: -7px;
+    position: absolute;
+    }
+.tanki-bottom-main{
+    position: absolute;
+}
+    .tank-lines span{
+      width:4px;
+      height:160px;
+      background:#8b7d7d;
+    }
+
+
+    .tanki-bottom {
+        left: 750px;
+    top: 154px;
+    position: absolute;
+    }
+
+    /* =========================================
+       AUTO START
+    ========================================== */
+
+    .auto-start{
+      position:absolute;
+      right:120px;
+      top:20px;
+      width:170px;
+      height:90px;
+      background:#f7d1d1;
+      border:2px solid #d2a5a5;
+      border-radius:8px;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      font-size:32px;
+      font-weight:bold;
+    }
+
+    /* =========================================
+       OFF BUTTON
+    ========================================== */
+
+    .off-btn{
+      position:absolute;
+      right:25px;
+      top:20px;
+
+      width:85px;
+      height:85px;
+
+      border-radius:50%;
+      background:red;
+      border:5px solid #9a0000;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      color:#fff;
+      font-size:30px;
+      font-weight:bold;
+    }
+
+
+      .tank{
+     --water-level: 70%;
+    width: 182px;
+    height: 102px;
+    border: 4px solid #222;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+        position: absolute;
+    left: 756px;
+    top: 56px;
+    }
+
+    /* Water */
+    .tank::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:0;
+      width:100%;
+      height:var(--water-level);
+      background:linear-gradient(
+        to bottom,
+        #4fc3f7,
+        #0288d1
+      );
+      transition:0.5s ease;
+    }
+
+    /* Percentage Text */
+    .tank .label{
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%, -50%);
+      z-index:2;
+      font-size:32px;
+      font-weight:bold;
+      color:#222;
+    }
+
+    .pipe-small{
+          width: 229px;
+    right: 273px;
+    top: 128px;
+    }
+
+    .chlorine-stand{
+      width: 4px;
+    height: 193px;
+    background: #8e8d8d;
+    position: absolute;
+    right: 201px;
+    top: 154px;
+    }
+
+    /* =========================================
+       RESPONSIVE
+    ========================================== */
+
+    @media(max-width:768px){
+
+      .plant-container{
+        transform:scale(.8);
+        transform-origin:top left;
+        height:600px;
+      }
+
+    }
+
+    @media(max-width:576px){
+
+      .plant-container{
+        transform:scale(.6);
+        transform-origin:top left;
+        height:500px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="scada-wrapper">
+
+    <div class="plant-container">
+
+
+     
+
+      <!-- STATUS -->
+      <div class="status-box">
+        <div class="status">
+          <div class="circle red"></div>
+          CLOSED
+        </div>
+
+      </div>
+
+    
+
+      <!-- MAIN PIPE -->
+      <div class="pipe pipe-main">
+        <div class="pipe-flow"></div>
+      </div>
+<!-- RIGHT PIPE -->
+      <div class="pipe pipe-small">
+        <div class="pipe-flow"></div>
+      </div>
+      <!-- RIGHT PIPE -->
+      <div class="pipe pipe-right">
+        <div class="pipe-flow"></div>
+      </div>
+
+      <!-- VERTICAL PIPE -->
+      <div class="pipe pipe-vertical">
+        <div class="pipe-flow"></div>
+      </div>
+
+      <!-- ELBOWS -->
+      <div class="elbow1 elbow-top">
+ <img src="./assets/images/elbow-bottom.png" alt="elbow" style="width: 47px;transform: rotate(
+270deg);">
+
+      </div>
+      <div class="elbow elbow-bottom">
+        <img src="./assets/images/elbow-bottom.png" alt="elbow" style="width: 47px;transform: rotate(
+270deg);">
+      </div>
+
+ <div class="tanki-bottom-main"></div>
+      <div class="tanki-top">
+        <img src="./assets/images/tanki-head.png" alt="tanki-head" style="width: 194px;"/>
+        
+      </div>
+
+
+
+        <div class="tank">
+            <div class="label">70%</div>
+        </div>
+
+        <!-- ELBOWS -->
+      <div class="tanki-bottom-main"></div>
+      <div class="tanki-bottom">
+        <img src="./assets/images/tanki-bottom.png" alt="tanki-bottom" style="width: 194px;"/>
+        <h2 style="text-align: center;margin-top: 10px;">Water Tank</h2>
+      </div>
+
+
+      <div class="">
+       
+         <div class="display chlorine-display">-343</div>
+                <!-- CHLORINE -->
+      <div class="label chlorine-label">CHLORINE</div>
+      <div class="label ppm">PPM</div>
+      </div>
+      <div class="chlorine-stand">
+
+      </div>
+
+
+      <!-- VALVE 1 -->
+      <div class="red-valve1 valve">
+        <img src="./assets/images/redd.png" alt="off"/> 
+        <div class="red-valve-label">
+          VALVE
+        </div>
+      </div>
+
+      <!-- VALVE 2 -->
+      <div class="valve green-valve">
+        <img src="./assets/images/green.png" alt="off" style="width: 80px;"/> 
+      </div>
+
+      <div class="fcv">FCV</div>
+
+      <div class="main-valve">
+        
+        MAIN VALVE
+      </div>
+
+      <!-- FLOW DISPLAY -->
+      <div class="display flow-display">
+        -123.4
+      </div>
+
+      <div class="label flow-label">
+        M3/H
+      </div>
+
+      <!-- FLOW METER -->
+      <div class="flow-meter">
+
+        <img src="./assets/images/flowmeter.png"alt="flowmeter" style="width: 135px;"/>
+      </div>
+
+      <div class="flow-meter-label">
+        FLOW METER
+      </div>
+
+    
+   
+      <!-- SENSOR -->
+      <div class="label sensor-label">
+        RADAR LEVEL <br>
+        SENSOR
+      </div>
+
+      <!-- LEVEL DISPLAY -->
+      <div class="display level-display">
+        -123.4
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
